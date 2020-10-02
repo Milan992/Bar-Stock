@@ -88,4 +88,4 @@ namespace WpfBarStock.ViewModels
         #endregion
     }
 }
-}
+
