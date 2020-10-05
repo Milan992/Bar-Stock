@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BarStockModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblArticle">
+          <Key>
+            <PropertyRef Name="ArticleID" />
+          </Key>
+          <Property Name="ArticleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ArticleName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Price" Type="int" />
+          <Property Name="UnitOfMeasurement" Type="varchar" MaxLength="10" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="NewAmount" Type="int" Nullable="false" />
+          <Property Name="ProcuredAmount" Type="int" />
+          <Property Name="AmountSold" Type="int" />
+          <Property Name="CalculationMethodID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblCalculationMethod">
+          <Key>
+            <PropertyRef Name="CalculationMethodID" />
+          </Key>
+          <Property Name="CalculationMethodID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CalculationMethodeName" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblEmployee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Pass" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BarStock.dbo.vwArticle' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwArticle">
+          <Key>
+            <PropertyRef Name="ArticleID" />
+            <PropertyRef Name="ArticleName" />
+            <PropertyRef Name="Amount" />
+            <PropertyRef Name="NewAmount" />
+            <PropertyRef Name="CalculationMethodID" />
+            <PropertyRef Name="CalculationMethodeName" />
+          </Key>
+          <Property Name="ArticleID" Type="int" Nullable="false" />
+          <Property Name="ArticleName" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Price" Type="int" />
+          <Property Name="UnitOfMeasurement" Type="varchar" MaxLength="10" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="NewAmount" Type="int" Nullable="false" />
+          <Property Name="ProcuredAmount" Type="int" />
+          <Property Name="AmountSold" Type="int" />
+          <Property Name="CalculationMethodID" Type="int" Nullable="false" />
+          <Property Name="CalculationMethodeName" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__tblArticl__Calcu__5F492382">
+          <End Role="tblCalculationMethod" Type="Self.tblCalculationMethod" Multiplicity="1" />
+          <End Role="tblArticle" Type="Self.tblArticle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCalculationMethod">
+              <PropertyRef Name="CalculationMethodID" />
+            </Principal>
+            <Dependent Role="tblArticle">
+              <PropertyRef Name="CalculationMethodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BarStockModelStoreContainer">
+          <EntitySet Name="tblArticle" EntityType="Self.tblArticle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCalculationMethod" EntityType="Self.tblCalculationMethod" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblEmployee" EntityType="Self.tblEmployee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vwArticle" EntityType="Self.vwArticle" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwArticle].[ArticleID] AS [ArticleID], 
+    [vwArticle].[ArticleName] AS [ArticleName], 
+    [vwArticle].[Price] AS [Price], 
+    [vwArticle].[UnitOfMeasurement] AS [UnitOfMeasurement], 
+    [vwArticle].[Amount] AS [Amount], 
+    [vwArticle].[NewAmount] AS [NewAmount], 
+    [vwArticle].[ProcuredAmount] AS [ProcuredAmount], 
+    [vwArticle].[AmountSold] AS [AmountSold], 
+    [vwArticle].[CalculationMethodID] AS [CalculationMethodID], 
+    [vwArticle].[CalculationMethodeName] AS [CalculationMethodeName]
+    FROM [dbo].[vwArticle] AS [vwArticle]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__tblArticl__Calcu__5F492382" Association="Self.FK__tblArticl__Calcu__5F492382">
+            <End Role="tblCalculationMethod" EntitySet="tblCalculationMethod" />
+            <End Role="tblArticle" EntitySet="tblArticle" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BarStockModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblArticle">
+          <Key>
+            <PropertyRef Name="ArticleID" />
+          </Key>
+          <Property Name="ArticleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ArticleName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Price" Type="Int32" />
+          <Property Name="UnitOfMeasurement" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="NewAmount" Type="Int32" Nullable="false" />
+          <Property Name="ProcuredAmount" Type="Int32" />
+          <Property Name="AmountSold" Type="Int32" />
+          <Property Name="CalculationMethodID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblCalculationMethod" Relationship="Self.FK__tblArticl__Calcu__5F492382" FromRole="tblArticle" ToRole="tblCalculationMethod" />
+        </EntityType>
+        <EntityType Name="tblCalculationMethod">
+          <Key>
+            <PropertyRef Name="CalculationMethodID" />
+          </Key>
+          <Property Name="CalculationMethodID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CalculationMethodeName" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="tblArticles" Relationship="Self.FK__tblArticl__Calcu__5F492382" FromRole="tblCalculationMethod" ToRole="tblArticle" />
+        </EntityType>
+        <EntityType Name="tblEmployee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Pass" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vwArticle">
+          <Key>
+            <PropertyRef Name="ArticleID" />
+            <PropertyRef Name="ArticleName" />
+            <PropertyRef Name="Amount" />
+            <PropertyRef Name="NewAmount" />
+            <PropertyRef Name="CalculationMethodID" />
+            <PropertyRef Name="CalculationMethodeName" />
+          </Key>
+          <Property Name="ArticleID" Type="Int32" Nullable="false" />
+          <Property Name="ArticleName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Price" Type="Int32" />
+          <Property Name="UnitOfMeasurement" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="NewAmount" Type="Int32" Nullable="false" />
+          <Property Name="ProcuredAmount" Type="Int32" />
+          <Property Name="AmountSold" Type="Int32" />
+          <Property Name="CalculationMethodID" Type="Int32" Nullable="false" />
+          <Property Name="CalculationMethodeName" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__tblArticl__Calcu__5F492382">
+          <End Role="tblCalculationMethod" Type="Self.tblCalculationMethod" Multiplicity="1" />
+          <End Role="tblArticle" Type="Self.tblArticle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCalculationMethod">
+              <PropertyRef Name="CalculationMethodID" />
+            </Principal>
+            <Dependent Role="tblArticle">
+              <PropertyRef Name="CalculationMethodID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BarStockEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblArticles" EntityType="Self.tblArticle" />
+          <EntitySet Name="tblCalculationMethods" EntityType="Self.tblCalculationMethod" />
+          <EntitySet Name="tblEmployees" EntityType="Self.tblEmployee" />
+          <EntitySet Name="vwArticles" EntityType="Self.vwArticle" />
+          <AssociationSet Name="FK__tblArticl__Calcu__5F492382" Association="Self.FK__tblArticl__Calcu__5F492382">
+            <End Role="tblCalculationMethod" EntitySet="tblCalculationMethods" />
+            <End Role="tblArticle" EntitySet="tblArticles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BarStockModelStoreContainer" CdmEntityContainer="BarStockEntities">
+          <EntitySetMapping Name="tblArticles">
+            <EntityTypeMapping TypeName="BarStockModel.tblArticle">
+              <MappingFragment StoreEntitySet="tblArticle">
+                <ScalarProperty Name="ArticleID" ColumnName="ArticleID" />
+                <ScalarProperty Name="ArticleName" ColumnName="ArticleName" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="UnitOfMeasurement" ColumnName="UnitOfMeasurement" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="NewAmount" ColumnName="NewAmount" />
+                <ScalarProperty Name="ProcuredAmount" ColumnName="ProcuredAmount" />
+                <ScalarProperty Name="AmountSold" ColumnName="AmountSold" />
+                <ScalarProperty Name="CalculationMethodID" ColumnName="CalculationMethodID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCalculationMethods">
+            <EntityTypeMapping TypeName="BarStockModel.tblCalculationMethod">
+              <MappingFragment StoreEntitySet="tblCalculationMethod">
+                <ScalarProperty Name="CalculationMethodID" ColumnName="CalculationMethodID" />
+                <ScalarProperty Name="CalculationMethodeName" ColumnName="CalculationMethodeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblEmployees">
+            <EntityTypeMapping TypeName="BarStockModel.tblEmployee">
+              <MappingFragment StoreEntitySet="tblEmployee">
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Pass" ColumnName="Pass" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwArticles">
+            <EntityTypeMapping TypeName="BarStockModel.vwArticle">
+              <MappingFragment StoreEntitySet="vwArticle">
+                <ScalarProperty Name="ArticleID" ColumnName="ArticleID" />
+                <ScalarProperty Name="ArticleName" ColumnName="ArticleName" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="UnitOfMeasurement" ColumnName="UnitOfMeasurement" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="NewAmount" ColumnName="NewAmount" />
+                <ScalarProperty Name="ProcuredAmount" ColumnName="ProcuredAmount" />
+                <ScalarProperty Name="AmountSold" ColumnName="AmountSold" />
+                <ScalarProperty Name="CalculationMethodID" ColumnName="CalculationMethodID" />
+                <ScalarProperty Name="CalculationMethodeName" ColumnName="CalculationMethodeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

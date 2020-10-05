@@ -30,7 +30,7 @@ CalculationMethodeName varchar(10) not null
 
 create table tblArticle(
 ArticleID int identity(1,1) primary key,
-ArticleName varchar(30) not null,
+ArticleName varchar(30) not null unique,
 Price int check(Price >= 0),
 UnitOfMeasurement varchar(10),
 Amount int check(Amount >= 0) not null,

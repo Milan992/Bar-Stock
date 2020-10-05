@@ -72,7 +72,11 @@ namespace WpfBarStock.ViewModels
         {
             try
             {
-               
+                tblEmployee employee = new tblEmployee();
+                if (IsEmployee(UserName, Password, out employee))
+                {
+
+                }
             }
             catch (Exception ex)
             {
