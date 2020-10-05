@@ -45,7 +45,7 @@ namespace WpfBarStock
         {
             try
             {
-                using (StreamReader sr = new StreamReader(@"AdminCredentials.txt"))
+                using (StreamReader sr = new StreamReader(@"..\..\AdminCredentials.txt"))
                 {
                     List<string> credentials = new List<string>();
                     string line;
