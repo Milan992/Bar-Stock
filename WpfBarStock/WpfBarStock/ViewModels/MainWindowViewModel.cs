@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Input;
+using WpfBarStock.Model;
 
 namespace WpfBarStock.ViewModels
 {
     class MainWindowViewModel : ViewModelBase
     {
+        Service service = new Service();
         MainWindow main;
 
         #region Constructors
@@ -72,8 +74,12 @@ namespace WpfBarStock.ViewModels
         {
             try
             {
-                tblEmployee employee = new tblEmployee();
-                if (IsEmployee(UserName, Password, out employee))
+                tblEmployee employee;
+                if (service.IsEmployee(UserName, Password, out employee))
+                {
+
+                }
+                else if (service.IsAdmin(UserName, Password))
                 {
 
                 }
