@@ -18,23 +18,23 @@ drop view vwArticle;
 
 create table tblEmployee(
 EmployeeID int identity(1,1) primary key,
-FullName varchar(30) check(len(FullName) > 5) not null,
+FullName varchar(30) check(len(FullName) > 1) not null,
 UserName varchar(30) check(len(UserName) > 4) not null unique,
 Pass varchar(30) check(len(Pass) > 4) not null
 )
 
 Create table tblCalculationMethod(
 CalculationMethodID int identity (1,1) primary key,
-CalculationMethodeName varchar(10) not null
+CalculationMethodName varchar(30) not null unique
 )
 
 create table tblArticle(
 ArticleID int identity(1,1) primary key,
 ArticleName varchar(30) not null unique,
 Price int check(Price >= 0),
-UnitOfMeasurement varchar(10),
-Amount int check(Amount >= 0) not null,
-NewAmount int check(NewAmount >= 0) not null,
+UnitOfMeasurement varchar(10) check(UnitOfMeasurement in ('kom', 'l')),
+Amount decimal check(Amount >= 0) not null,
+NewAmount int check(NewAmount >= 0),
 ProcuredAmount int,
 AmountSold int check(AmountSold >= 0),
 CalculationMethodID int foreign key (CalculationMethodID) references tblCalculationMethod(CalculationMethodID) not null,
@@ -52,7 +52,7 @@ GO
 
 CREATE VIEW [dbo].[vwArticle]
 AS
-SELECT        dbo.tblArticle.*, dbo.tblCalculationMethod.CalculationMethodeName
+SELECT        dbo.tblArticle.*, dbo.tblCalculationMethod.CalculationMethodName
 FROM            dbo.tblArticle INNER JOIN
                          dbo.tblCalculationMethod ON dbo.tblArticle.CalculationMethodID = dbo.tblCalculationMethod.CalculationMethodID
 GO

@@ -78,6 +78,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BarStockDataBaseModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Model\Check.cs" />
     <Compile Include="Model\tblArticle.cs">
       <DependentUpon>BarStockDataBaseModel.tt</DependentUpon>
     </Compile>
@@ -158,21 +159,20 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <Resource Include="AdminCredentials.txt" />
-  </ItemGroup>
   <ItemGroup>
     <Content Include="Model\BarStockDataBaseModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>BarStockDataBaseModel.Context.cs</LastGenOutput>
       <DependentUpon>BarStockDataBaseModel.edmx</DependentUpon>
+      <LastGenOutput>BarStockDataBaseModel.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Model\BarStockDataBaseModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>BarStockDataBaseModel.edmx</DependentUpon>
       <LastGenOutput>BarStockDataBaseModel.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="AdminCredentials.txt" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

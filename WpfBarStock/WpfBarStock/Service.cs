@@ -4,6 +4,7 @@ using System.Linq;
 using System.IO;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace WpfBarStock
 {
@@ -68,6 +69,27 @@ namespace WpfBarStock
                 MessageBox.Show(ex.ToString());
                 return false;
             }
+        }
+
+        /// <summary>
+        /// Retrives all articles from database and adds them to a list.
+        /// </summary>
+        /// <returns></returns>
+        public List<vwArticle> GetAllArticles()
+        {
+            List<vwArticle> articles;
+            try
+            {
+                using (BarStockEntities context = new BarStockEntities())
+                {
+                    articles = (from a in context.vwArticles select a).ToList();
+                }
+            }
+            catch 
+            {
+                articles = null;
+            }
+            return articles;
         }
     }
 }

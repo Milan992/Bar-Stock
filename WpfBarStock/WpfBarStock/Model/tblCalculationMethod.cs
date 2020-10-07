@@ -21,7 +21,7 @@ namespace WpfBarStock.Model
         }
     
         public int CalculationMethodID { get; set; }
-        public string CalculationMethodeName { get; set; }
+        public string CalculationMethodName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblArticle> tblArticles { get; set; }

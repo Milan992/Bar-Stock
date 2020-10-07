@@ -5,8 +5,120 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfBarStock.Views"
         mc:Ignorable="d"
-        Title="Employee" Height="450" Width="800">
-    <Grid>
-        
+        Title="Zaliha"
+        Height="auto"
+        Width="919">
+    <Grid Name="grid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="6" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="6" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="6" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="6" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="6" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="20" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="6" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="6" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="6" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="6" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="20" />
+        </Grid.RowDefinitions>
+
+        <DataGrid 
+            Grid.Row="1" Grid.Column="1"
+            Name="ArticlesDataGrid"
+            HorizontalAlignment="Left"
+            Height="160"
+            Margin="10,10,0,0"
+            VerticalAlignment="Top"
+            Width="auto"
+            AutoGenerateColumns="False"
+            ItemsSource="{Binding Articles, UpdateSourceTrigger=PropertyChanged}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Naziv"
+                                    Binding="{Binding ArticleName}" />
+                <DataGridTextColumn Header="Cena"
+                                    Binding="{Binding Price}" />
+                <DataGridTextColumn Header="Jedinica mere"
+                                    Binding="{Binding UnitOfMeasurement}" />
+                <DataGridTextColumn Header="Pocetno stanje"
+                                    Binding="{Binding Amount}" />
+                <DataGridTextColumn Header="Trenutno stanje"
+                                    Binding="{Binding NewAmount}" />
+                <DataGridTextColumn Header="Stiglo"
+                                    Binding="{Binding ProcuredAmount}" />
+                <DataGridTextColumn Header="Prodato"
+                                    Binding="{Binding AmountSold}" />
+                <DataGridTextColumn Header="Nacin obracuna"
+                                    Binding="{Binding CalculationMethodName}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Label HorizontalAlignment="Right" Grid.Column="7" Grid.Row="1" Margin="0,0,0,0">Kasa:</Label>
+        <Label HorizontalAlignment="Right" Grid.Column="7" Grid.Row="1" Margin="0,20,0,0">Kuhinja:</Label>
+        <Label HorizontalAlignment="Right" Grid.Column="7" Grid.Row="1" Margin="0,40,0,0">Kartica:</Label>
+        <Label HorizontalAlignment="Right" Grid.Column="7" Grid.Row="1" Margin="0,60,0,0">Plata:</Label>
+        <Label HorizontalAlignment="Right" Grid.Column="7" Grid.Row="1" Margin="0,80,0,0">Sale:</Label>
+        <Label HorizontalAlignment="Right" Grid.Column="7" Grid.Row="1" Margin="0,100,0,0">Novine:</Label>
+        <Label HorizontalAlignment="Right" Grid.Column="7" Grid.Row="1" Margin="0,120,0,0">Sale:</Label>
+        <Label HorizontalAlignment="Right" Grid.Column="7" Grid.Row="1" Margin="0,140,0,0">Plus:</Label>
+        <Label HorizontalAlignment="Right" Grid.Column="7" Grid.Row="1" Margin="0,160,0,0">Minus:</Label>
+
+        <TextBox Width="90" Height="18" Grid.Column="9" Grid.Row="1" Margin="0,7,20,168"></TextBox>
+        <TextBox Width="90" Height="18" Grid.Column="9" Grid.Row="1" Margin="0,27,20,148"></TextBox>
+        <TextBox Width="90" Height="18" Grid.Column="9" Grid.Row="1" Margin="0,47,20,128"></TextBox>
+        <TextBox Width="90" Height="18" Grid.Column="9" Grid.Row="1" Margin="0,67,20,108"></TextBox>
+        <TextBox Width="90" Height="18" Grid.Column="9" Grid.Row="1" Margin="0,87,20,88"></TextBox>
+        <TextBox Width="90" Height="18" Grid.Column="9" Grid.Row="1" Margin="0,107,20,68"></TextBox>
+        <TextBox Width="90" Height="18" Grid.Column="9" Grid.Row="1" Margin="0,127,20,48"></TextBox>
+        <TextBox Width="90" Height="18" Grid.Column="9" Grid.Row="1" Margin="0,147,20,28"></TextBox>
+        <TextBox Width="90" Height="18" Grid.Column="9" Grid.Row="1" Margin="0,167,20,8"></TextBox>
+
+        <TextBox Text="ime zaposlenog..." Width="120" Height="18" Grid.Column="11" Grid.Row="1" Margin="0,67,20,108"></TextBox>
+        <TextBox Text="opis..." Width="120" Height="18" Grid.Column="11" Grid.Row="1" Margin="0,147,20,28"></TextBox>
+        <TextBox Text="opis..." Width="120" Height="18" Grid.Column="11" Grid.Row="1" Margin="0,167,20,8"></TextBox>
+
+        <StackPanel   
+            Grid.Row="3" Grid.Column="9">
+            <Label Content="Cekovi:"/>
+            <DataGrid 
+            Name="ChecksDataGrid"
+            HorizontalAlignment="Left"
+            Height="160"
+            Margin="0,0,0,0"
+            VerticalAlignment="Top"
+            Width="auto"
+            AutoGenerateColumns="False"
+            ItemsSource="{Binding Checks, UpdateSourceTrigger=PropertyChanged}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Ime musterije"
+                                    Binding="{Binding CustomerName}" />
+                <DataGridTextColumn Header="Cena"
+                                    Binding="{Binding Amount}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        </StackPanel>
+        <Button Grid.Column="7" Grid.Row="9"
+                Command="{Binding Save}"
+                Height="20"
+                Width="80">Sacuvaj</Button>
+        <Button Grid.Column="9" Grid.Row="9"
+                Command="{Binding Print}"
+                Height="20"
+                Width="80">Stampaj</Button>
     </Grid>
 </Window>
