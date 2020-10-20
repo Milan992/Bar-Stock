@@ -14,9 +14,9 @@
           <Property Name="Price" Type="int" />
           <Property Name="UnitOfMeasurement" Type="varchar" MaxLength="10" />
           <Property Name="Amount" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="NewAmount" Type="int" />
-          <Property Name="ProcuredAmount" Type="int" />
-          <Property Name="AmountSold" Type="int" />
+          <Property Name="NewAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ProcuredAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="AmountSold" Type="decimal" Precision="18" Scale="0" />
           <Property Name="CalculationMethodID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tblCalculationMethod">
@@ -50,13 +50,13 @@ warning 6002: The table/view 'BarStock.dbo.vwArticle' does not have a primary ke
           <Property Name="Price" Type="int" />
           <Property Name="UnitOfMeasurement" Type="varchar" MaxLength="10" />
           <Property Name="Amount" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="NewAmount" Type="int" />
-          <Property Name="ProcuredAmount" Type="int" />
-          <Property Name="AmountSold" Type="int" />
+          <Property Name="NewAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ProcuredAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="AmountSold" Type="decimal" Precision="18" Scale="0" />
           <Property Name="CalculationMethodID" Type="int" Nullable="false" />
           <Property Name="CalculationMethodName" Type="varchar" MaxLength="30" Nullable="false" />
         </EntityType>
-        <Association Name="FK__tblArticl__Calcu__49AEE81E">
+        <Association Name="FK__tblArticl__Calcu__2CDD9F46">
           <End Role="tblCalculationMethod" Type="Self.tblCalculationMethod" Multiplicity="1" />
           <End Role="tblArticle" Type="Self.tblArticle" Multiplicity="*" />
           <ReferentialConstraint>
@@ -86,7 +86,7 @@ warning 6002: The table/view 'BarStock.dbo.vwArticle' does not have a primary ke
     [vwArticle].[CalculationMethodName] AS [CalculationMethodName]
     FROM [dbo].[vwArticle] AS [vwArticle]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK__tblArticl__Calcu__49AEE81E" Association="Self.FK__tblArticl__Calcu__49AEE81E">
+          <AssociationSet Name="FK__tblArticl__Calcu__2CDD9F46" Association="Self.FK__tblArticl__Calcu__2CDD9F46">
             <End Role="tblCalculationMethod" EntitySet="tblCalculationMethod" />
             <End Role="tblArticle" EntitySet="tblArticle" />
           </AssociationSet>
@@ -105,11 +105,11 @@ warning 6002: The table/view 'BarStock.dbo.vwArticle' does not have a primary ke
           <Property Name="Price" Type="Int32" />
           <Property Name="UnitOfMeasurement" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Amount" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="NewAmount" Type="Int32" />
-          <Property Name="ProcuredAmount" Type="Int32" />
-          <Property Name="AmountSold" Type="Int32" />
+          <Property Name="NewAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ProcuredAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="AmountSold" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="CalculationMethodID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="tblCalculationMethod" Relationship="Self.FK__tblArticl__Calcu__49AEE81E" FromRole="tblArticle" ToRole="tblCalculationMethod" />
+          <NavigationProperty Name="tblCalculationMethod" Relationship="Self.FK__tblArticl__Calcu__2CDD9F46" FromRole="tblArticle" ToRole="tblCalculationMethod" />
         </EntityType>
         <EntityType Name="tblCalculationMethod">
           <Key>
@@ -117,7 +117,7 @@ warning 6002: The table/view 'BarStock.dbo.vwArticle' does not have a primary ke
           </Key>
           <Property Name="CalculationMethodID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CalculationMethodName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="tblArticles" Relationship="Self.FK__tblArticl__Calcu__49AEE81E" FromRole="tblCalculationMethod" ToRole="tblArticle" />
+          <NavigationProperty Name="tblArticles" Relationship="Self.FK__tblArticl__Calcu__2CDD9F46" FromRole="tblCalculationMethod" ToRole="tblArticle" />
         </EntityType>
         <EntityType Name="tblEmployee">
           <Key>
@@ -141,13 +141,13 @@ warning 6002: The table/view 'BarStock.dbo.vwArticle' does not have a primary ke
           <Property Name="Price" Type="Int32" />
           <Property Name="UnitOfMeasurement" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Amount" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="NewAmount" Type="Int32" />
-          <Property Name="ProcuredAmount" Type="Int32" />
-          <Property Name="AmountSold" Type="Int32" />
+          <Property Name="NewAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ProcuredAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="AmountSold" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="CalculationMethodID" Type="Int32" Nullable="false" />
           <Property Name="CalculationMethodName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
-        <Association Name="FK__tblArticl__Calcu__49AEE81E">
+        <Association Name="FK__tblArticl__Calcu__2CDD9F46">
           <End Role="tblCalculationMethod" Type="Self.tblCalculationMethod" Multiplicity="1" />
           <End Role="tblArticle" Type="Self.tblArticle" Multiplicity="*" />
           <ReferentialConstraint>
@@ -164,7 +164,7 @@ warning 6002: The table/view 'BarStock.dbo.vwArticle' does not have a primary ke
           <EntitySet Name="tblCalculationMethods" EntityType="Self.tblCalculationMethod" />
           <EntitySet Name="tblEmployees" EntityType="Self.tblEmployee" />
           <EntitySet Name="vwArticles" EntityType="Self.vwArticle" />
-          <AssociationSet Name="FK__tblArticl__Calcu__49AEE81E" Association="Self.FK__tblArticl__Calcu__49AEE81E">
+          <AssociationSet Name="FK__tblArticl__Calcu__2CDD9F46" Association="Self.FK__tblArticl__Calcu__2CDD9F46">
             <End Role="tblCalculationMethod" EntitySet="tblCalculationMethods" />
             <End Role="tblArticle" EntitySet="tblArticles" />
           </AssociationSet>

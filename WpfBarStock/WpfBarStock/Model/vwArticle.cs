@@ -19,9 +19,9 @@ namespace WpfBarStock.Model
         public Nullable<int> Price { get; set; }
         public string UnitOfMeasurement { get; set; }
         public decimal Amount { get; set; }
-        public Nullable<int> NewAmount { get; set; }
-        public Nullable<int> ProcuredAmount { get; set; }
-        public Nullable<int> AmountSold { get; set; }
+        public Nullable<decimal> NewAmount { get; set; }
+        public Nullable<decimal> ProcuredAmount { get; set; }
+        public Nullable<decimal> AmountSold { get; set; }
         public int CalculationMethodID { get; set; }
         public string CalculationMethodName { get; set; }
     }

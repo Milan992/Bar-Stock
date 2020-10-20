@@ -34,11 +34,20 @@ ArticleName varchar(30) not null unique,
 Price int check(Price >= 0),
 UnitOfMeasurement varchar(10) check(UnitOfMeasurement in ('kom', 'l')),
 Amount decimal check(Amount >= 0) not null,
-NewAmount int check(NewAmount >= 0),
-ProcuredAmount int,
-AmountSold int check(AmountSold >= 0),
+NewAmount decimal check(NewAmount >= 0),
+ProcuredAmount decimal,
+AmountSold decimal check(AmountSold >= 0),
 CalculationMethodID int foreign key (CalculationMethodID) references tblCalculationMethod(CalculationMethodID) not null,
 )
+
+insert into tblCalculationMethod (CalculationMethodName)
+values ('Upisi novo stranje artikla');
+
+insert into tblCalculationMethod (CalculationMethodName)
+values ('Upisi broj prodatih artikala');
+
+insert into tblCalculationMethod (CalculationMethodName)
+values ('Upisi stanje na brojacu');
 
 USE [BarStock]
 GO

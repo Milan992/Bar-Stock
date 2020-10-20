@@ -91,5 +91,39 @@ namespace WpfBarStock
             }
             return articles;
         }
+
+        /// <summary>
+        /// Counts sold Amount for every article.
+        /// </summary>
+        /// <param name="articles"></param>
+        /// <returns>List of articles with calculated sold amount</returns>
+        public List<vwArticle> CountSoldArticles(List<vwArticle> articles)
+        {
+            for (int i = 0; i < articles.Count; i++)
+            {
+                articles[i].AmountSold = articles[i].Amount - articles[i].NewAmount;
+            }
+            return articles;
+        }
+
+        /// <summary>
+        /// Calculates summed PriceSold for all articles in the list.
+        /// </summary>
+        /// <param name="articles"></param>
+        /// <returns></returns>
+        public int CountBar(List<vwArticle> articles)
+        {
+            int sum = 0;
+            for (int i = 0; i < articles.Count; i++)
+            {
+                sum += Convert.ToInt32(articles[i].PriceSold);
+            }
+            return sum;
+        }
+
+        public int CountCash()
+        {
+
+        }
     }
 }

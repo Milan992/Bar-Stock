@@ -6,8 +6,9 @@
         xmlns:local="clr-namespace:WpfBarStock.Views"
         mc:Ignorable="d"
         Title="Zaliha"
-        Height="auto"
-        Width="919">
+        Height="697"
+        Width="1000"
+        WindowState="Maximized">
     <Grid Name="grid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20" />
@@ -28,9 +29,9 @@
             <RowDefinition Height="20" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="6" />
-            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="6" />
-            <RowDefinition Height="auto" />
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="6" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="6" />
@@ -40,9 +41,10 @@
 
         <DataGrid 
             Grid.Row="1" Grid.Column="1"
+            Grid.RowSpan="20"
             Name="ArticlesDataGrid"
             HorizontalAlignment="Left"
-            Height="160"
+            Height="500"
             Margin="10,10,0,0"
             VerticalAlignment="Top"
             Width="auto"
@@ -63,37 +65,45 @@
                                     Binding="{Binding ProcuredAmount}" />
                 <DataGridTextColumn Header="Prodato"
                                     Binding="{Binding AmountSold}" />
+                <DataGridTextColumn Header="Ukupna cena"
+                                    Binding="{Binding PriceSold}" />
                 <DataGridTextColumn Header="Nacin obracuna"
                                     Binding="{Binding CalculationMethodName}" />
             </DataGrid.Columns>
         </DataGrid>
 
-        <Label HorizontalAlignment="Right" Grid.Column="7" Grid.Row="1" Margin="0,0,0,0">Kasa:</Label>
-        <Label HorizontalAlignment="Right" Grid.Column="7" Grid.Row="1" Margin="0,20,0,0">Kuhinja:</Label>
-        <Label HorizontalAlignment="Right" Grid.Column="7" Grid.Row="1" Margin="0,40,0,0">Kartica:</Label>
-        <Label HorizontalAlignment="Right" Grid.Column="7" Grid.Row="1" Margin="0,60,0,0">Plata:</Label>
-        <Label HorizontalAlignment="Right" Grid.Column="7" Grid.Row="1" Margin="0,80,0,0">Sale:</Label>
-        <Label HorizontalAlignment="Right" Grid.Column="7" Grid.Row="1" Margin="0,100,0,0">Novine:</Label>
-        <Label HorizontalAlignment="Right" Grid.Column="7" Grid.Row="1" Margin="0,120,0,0">Sale:</Label>
-        <Label HorizontalAlignment="Right" Grid.Column="7" Grid.Row="1" Margin="0,140,0,0">Plus:</Label>
-        <Label HorizontalAlignment="Right" Grid.Column="7" Grid.Row="1" Margin="0,160,0,0">Minus:</Label>
+        <Label HorizontalAlignment="Right" Grid.Column="3" Grid.Row="1" Margin="0,0,0,0" Width="37">Kasa:</Label>
+        <Label HorizontalAlignment="Right" Grid.Column="3" Grid.Row="1" Margin="0,20,0,0" Width="52">Kuhinja:</Label>
+        <Label HorizontalAlignment="Right" Grid.Column="3" Grid.Row="1" Margin="0,40,0,0" Width="48">Kartica:</Label>
+        <Label HorizontalAlignment="Right" Grid.Column="3" Grid.Row="1" Margin="0,60,0,0" Width="39">Plata:</Label>
+        <Label HorizontalAlignment="Right" Grid.Column="3" Grid.Row="1" Margin="0,80,0,0" Width="34">Sale:</Label>
+        <Label HorizontalAlignment="Right" Grid.Column="3" Grid.Row="1" Margin="0,100,0,0" Width="50">Novine:</Label>
+        <Label HorizontalAlignment="Right" Grid.Column="3" Grid.Row="1" Margin="0,120,0,0" Width="34">Plus:</Label>
+        <Label HorizontalAlignment="Right" Grid.Column="3" Grid.Row="1" Margin="0,140,0,0" Width="45">Minus:</Label>
 
-        <TextBox Width="90" Height="18" Grid.Column="9" Grid.Row="1" Margin="0,7,20,168"></TextBox>
-        <TextBox Width="90" Height="18" Grid.Column="9" Grid.Row="1" Margin="0,27,20,148"></TextBox>
-        <TextBox Width="90" Height="18" Grid.Column="9" Grid.Row="1" Margin="0,47,20,128"></TextBox>
-        <TextBox Width="90" Height="18" Grid.Column="9" Grid.Row="1" Margin="0,67,20,108"></TextBox>
-        <TextBox Width="90" Height="18" Grid.Column="9" Grid.Row="1" Margin="0,87,20,88"></TextBox>
-        <TextBox Width="90" Height="18" Grid.Column="9" Grid.Row="1" Margin="0,107,20,68"></TextBox>
-        <TextBox Width="90" Height="18" Grid.Column="9" Grid.Row="1" Margin="0,127,20,48"></TextBox>
-        <TextBox Width="90" Height="18" Grid.Column="9" Grid.Row="1" Margin="0,147,20,28"></TextBox>
-        <TextBox Width="90" Height="18" Grid.Column="9" Grid.Row="1" Margin="0,167,20,8"></TextBox>
+        <TextBox Grid.Column="5" Grid.Row="1" Margin="6,7,26,169" Width="90"/>
+        <TextBox Grid.Column="5" Grid.Row="1" Margin="6,27,26,149" Width="90"/>
+        <TextBox Grid.Column="5" Grid.Row="1" Margin="6,47,26,129" Width="90"/>
+        <TextBox Grid.Column="5" Grid.Row="1" Margin="6,67,26,109" Width="90"/>
+        <TextBox Grid.Column="5" Grid.Row="1" Margin="6,87,26,89" Width="90"/>
+        <TextBox Grid.Column="5" Grid.Row="1" Margin="6,107,26,69" Width="90"/>
+        <TextBox Grid.Column="5" Grid.Row="1" Margin="6,127,26,49" Width="90"/>
+        <TextBox Grid.Column="5" Grid.Row="1" Margin="6,147,26,29" Width="90"/>
 
-        <TextBox Text="ime zaposlenog..." Width="120" Height="18" Grid.Column="11" Grid.Row="1" Margin="0,67,20,108"></TextBox>
-        <TextBox Text="opis..." Width="120" Height="18" Grid.Column="11" Grid.Row="1" Margin="0,147,20,28"></TextBox>
-        <TextBox Text="opis..." Width="120" Height="18" Grid.Column="11" Grid.Row="1" Margin="0,167,20,8"></TextBox>
+        <TextBox Text="ime zaposlenog..." Grid.Column="7" Grid.Row="1" Margin="1,67,20,109"/>
+        <TextBox Text="opis..." Grid.Column="7" Grid.Row="1" Margin="1,127,20,49"/>
+        <TextBox Text="opis..." Grid.Column="7" Grid.Row="1" Margin="1,147,20,29"/>
+
+        <Label HorizontalAlignment="Right" Grid.Column="3" Grid.Row="5" Margin="0,0,0,0" Width="48">Smena:</Label>
+        <Label HorizontalAlignment="Right" Grid.Column="3" Grid.Row="5" Margin="0,20,0,0" Width="60">Konobari:</Label>
+        <Label HorizontalAlignment="Right" Grid.Column="3" Grid.Row="5" Margin="0,40,0,0" Width="48">Datum:</Label>
+
+        <ComboBox HorizontalAlignment="Left" ItemsSource="{Binding Shifts}"  SelectedItem="Shift" Width="50" Grid.Column="5" Grid.Row="5" Margin="6,7,26,169"/>
+        <TextBox HorizontalAlignment="Left" Width="200" Grid.Column="5" Grid.Row="5" Margin="6,27,26,149" Grid.ColumnSpan="3" Height="18"/>
+        <DatePicker  SelectedDate="{Binding Date}"  HorizontalAlignment="Left" Width="90" Grid.Column="5" Grid.Row="5" Margin="6,47,0,129"/>
 
         <StackPanel   
-            Grid.Row="3" Grid.Column="9">
+            Grid.Row="3" Grid.Column="5">
             <Label Content="Cekovi:"/>
             <DataGrid 
             Name="ChecksDataGrid"
@@ -104,21 +114,27 @@
             Width="auto"
             AutoGenerateColumns="False"
             ItemsSource="{Binding Checks, UpdateSourceTrigger=PropertyChanged}">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Ime musterije"
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Ime musterije"
                                     Binding="{Binding CustomerName}" />
-                <DataGridTextColumn Header="Cena"
+                    <DataGridTextColumn Header="Cena"
                                     Binding="{Binding Amount}" />
-            </DataGrid.Columns>
-        </DataGrid>
+                </DataGrid.Columns>
+            </DataGrid>
         </StackPanel>
-        <Button Grid.Column="7" Grid.Row="9"
-                Command="{Binding Save}"
-                Height="20"
-                Width="80">Sacuvaj</Button>
-        <Button Grid.Column="9" Grid.Row="9"
-                Command="{Binding Print}"
-                Height="20"
-                Width="80">Stampaj</Button>
+
+        <StackPanel
+            Grid.Column="9"
+            Grid.Row="3">
+            <Label Content="Sank:" FontSize="16"></Label>
+            <TextBlock Text="{Binding Bar}" FontSize="24"></TextBlock>
+            <Label Content="Kes:" FontSize="20"></Label>
+            <TextBlock Text="{Binding Cash}" FontSize="30"></TextBlock>
+        </StackPanel>
+
+        <Button Grid.Column="3" Grid.Row="7"
+                Width="100" Command="{Binding Save}">Sacuvaj</Button>
+        <Button Grid.Column="5" Grid.Row="7"
+                HorizontalAlignment="Left" Width="100" Command="{Binding Print}">Stampaj</Button>
     </Grid>
 </Window>
