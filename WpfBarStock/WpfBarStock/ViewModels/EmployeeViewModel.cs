@@ -27,6 +27,7 @@ namespace WpfBarStock.ViewModels
             checks = new List<Check>();
             shifts = new List<string>() { "1", "2" };
             cash = "0";
+            date = DateTime.Now;
         }
 
         public EmployeeViewModel(Employee employeeOpen, tblEmployee employeeToView)
@@ -37,6 +38,7 @@ namespace WpfBarStock.ViewModels
             checks = new List<Check>();
             shifts = new List<string>() { "1", "2" };
             cash = "0";
+            date = DateTime.Now;
         }
 
         #endregion
@@ -51,7 +53,7 @@ namespace WpfBarStock.ViewModels
             set
             {
                 employee = value;
-                OnPropertyChanged("Emoloyee");
+                OnPropertyChanged("Employee");
             }
         }
 
@@ -259,6 +261,18 @@ namespace WpfBarStock.ViewModels
             }
         }
 
+        private int bar;
+
+        public int Bar
+        {
+            get { return bar; }
+            set
+            {
+                bar = value;
+                OnPropertyChanged("Bar");
+            }
+        }
+
         private string cash;
 
         public string Cash
@@ -327,6 +341,41 @@ namespace WpfBarStock.ViewModels
         }
 
         private bool CanPrintExecute()
+        {
+            return true;
+        }
+
+        private ICommand calculate;
+
+        public ICommand Calculate
+        {
+            get
+            {
+                if (calculate == null)
+                {
+                    calculate = new RelayCommand(param => CalculateExecute(), param => CanCalculateExecute());
+                }
+
+                return calculate;
+            }
+        }
+
+        private void CalculateExecute()
+        {
+            try
+            {
+                service.CalculateSoldArticles(Articles);
+                service.CalculatePriceSold(Articles);
+                Bar = service.CalculateBar(Articles);
+                e.ArticlesDataGrid.Items.Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private bool CanCalculateExecute()
         {
             return true;
         }

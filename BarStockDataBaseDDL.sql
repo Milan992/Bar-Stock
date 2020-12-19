@@ -37,6 +37,7 @@ Amount decimal check(Amount >= 0) not null,
 NewAmount decimal check(NewAmount >= 0),
 ProcuredAmount decimal,
 AmountSold decimal check(AmountSold >= 0),
+PriceSold int check(PriceSold >= 0),
 CalculationMethodID int foreign key (CalculationMethodID) references tblCalculationMethod(CalculationMethodID) not null,
 )
 

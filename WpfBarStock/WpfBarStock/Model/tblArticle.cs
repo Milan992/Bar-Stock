@@ -22,6 +22,7 @@ namespace WpfBarStock.Model
         public Nullable<decimal> NewAmount { get; set; }
         public Nullable<decimal> ProcuredAmount { get; set; }
         public Nullable<decimal> AmountSold { get; set; }
+        public Nullable<int> PriceSold { get; set; }
         public int CalculationMethodID { get; set; }
     
         public virtual tblCalculationMethod tblCalculationMethod { get; set; }

@@ -24,7 +24,7 @@ namespace WpfBarStock
                 using (BarStockEntities context = new BarStockEntities())
                 {
                     employee = (from e in context.tblEmployees where e.UserName == username && e.Pass == password select e).First();
-                    return true; 
+                    return true;
                 }
             }
             catch
@@ -64,7 +64,7 @@ namespace WpfBarStock
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
                 return false;
@@ -85,7 +85,7 @@ namespace WpfBarStock
                     articles = (from a in context.vwArticles select a).ToList();
                 }
             }
-            catch 
+            catch
             {
                 articles = null;
             }
@@ -93,17 +93,43 @@ namespace WpfBarStock
         }
 
         /// <summary>
-        /// Counts sold Amount for every article.
+        /// Calculates sold Amount for every article.
         /// </summary>
         /// <param name="articles"></param>
         /// <returns>List of articles with calculated sold amount</returns>
-        public List<vwArticle> CountSoldArticles(List<vwArticle> articles)
+        public void CalculateSoldArticles(List<vwArticle> articles)
         {
             for (int i = 0; i < articles.Count; i++)
             {
-                articles[i].AmountSold = articles[i].Amount - articles[i].NewAmount;
+                if (articles[i].ProcuredAmount == null)
+                {
+                    articles[i].ProcuredAmount = 0;
+                }
+
+                // calculation depends on calculation method
+                if (articles[i].CalculationMethodID == 1)
+                {
+                    articles[i].AmountSold = articles[i].Amount - articles[i].NewAmount + articles[i].ProcuredAmount;
+                }
+                else if (articles[i].CalculationMethodID == 3)
+                {
+                    articles[i].AmountSold = articles[i].NewAmount - articles[i].Amount;
+                }
+
+                if (articles[i].AmountSold < 0)
+                {
+                    MessageBox.Show("Broj prodatih " + articles[i].ArticleName + " ne moze biti manja od 0.");
+                    break;
+                }
             }
-            return articles;
+        }
+
+        public void CalculatePriceSold(List<vwArticle> articles)
+        {
+            for (int i = 0; i < articles.Count; i++)
+            {
+                articles[i].PriceSold = Convert.ToInt32(articles[i].AmountSold * articles[i].Price);
+            }
         }
 
         /// <summary>
@@ -111,19 +137,32 @@ namespace WpfBarStock
         /// </summary>
         /// <param name="articles"></param>
         /// <returns></returns>
-        public int CountBar(List<vwArticle> articles)
+        public int CalculateBar(List<vwArticle> articles)
         {
             int sum = 0;
             for (int i = 0; i < articles.Count; i++)
             {
                 sum += Convert.ToInt32(articles[i].PriceSold);
             }
+            // sum minus price of the milk for every sold espresso without milk.
+            sum -= Convert.ToInt32(10 * (from e in articles where e.ArticleName == "Espresso bez mleka" select e.Amount).First());
             return sum;
         }
 
-        public int CountCash()
+        public int CalculateCash(int cashbox, int kitchen, int card, int salary, int owner, int newspapers, int plus, int minus, int bar, int checks)
         {
+            int cash = cashbox + kitchen - card - salary - owner - newspapers + plus - minus + bar - checks;
+            return cash;
+        }
 
+        public int CalculateChecks(List<int> checks)
+        {
+            int sum = 0;
+            for (int i = 0; i < checks.Count; i++)
+            {
+                sum += checks[i];
+            }
+            return sum;
         }
     }
 }

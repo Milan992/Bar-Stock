@@ -4,12 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b2e6d7abdf5a4f638351d27646236d42" Name="Diagram1">
+      <Diagram DiagramId="5ef8fa60a5c54e318ea2f86aa870131f" Name="Diagram1">
         <EntityTypeShape EntityType="BarStockModel.tblArticle" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="BarStockModel.tblCalculationMethod" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="BarStockModel.tblEmployee" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="BarStockModel.vwArticle" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
-        <AssociationConnector Association="BarStockModel.FK__tblArticl__Calcu__2CDD9F46" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BarStockModel.tblCalculationMethod" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BarStockModel.tblEmployee" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BarStockModel.vwArticle" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <AssociationConnector Association="BarStockModel.FK__tblArticl__Calcu__3FF073BA" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

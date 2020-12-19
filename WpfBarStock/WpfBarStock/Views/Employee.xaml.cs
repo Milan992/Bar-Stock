@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Web.UI.WebControls;
+using System.Windows;
 using WpfBarStock.Model;
 using WpfBarStock.ViewModels;
 
