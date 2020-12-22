@@ -4,7 +4,6 @@ using System.Linq;
 using System.IO;
 using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace WpfBarStock
 {
@@ -144,14 +143,20 @@ namespace WpfBarStock
             {
                 sum += Convert.ToInt32(articles[i].PriceSold);
             }
-            // sum minus price of the milk for every sold espresso without milk.
-            sum -= Convert.ToInt32(10 * (from e in articles where e.ArticleName == "Espresso bez mleka" select e.Amount).First());
+
             return sum;
         }
 
-        public int CalculateCash(int cashbox, int kitchen, int card, int salary, int owner, int newspapers, int plus, int minus, int bar, int checks)
+        public int CalculateCash(int cashbox, int kitchen, int card, int salary, int owner, int newspaper, int plus, int minus, int bar, List<Check> checks)
         {
-            int cash = cashbox + kitchen - card - salary - owner - newspapers + plus - minus + bar - checks;
+            //sum all check's amounts
+            int checksSum = 0;
+            for (int i = 0; i < checks.Count; i++)
+            {
+                checksSum += checks[i].Amount;
+            }
+
+            int cash = cashbox + kitchen - card - salary - owner - newspaper + plus - minus + bar - checksSum;
             return cash;
         }
 
@@ -163,6 +168,32 @@ namespace WpfBarStock
                 sum += checks[i];
             }
             return sum;
+        }
+
+        /// <summary>
+        /// Updates articles amount in DB with data from the list.
+        /// </summary>
+        /// <param name="articles"></param>
+        public void UpdateAmount(List<vwArticle> articles)
+        {
+            using (BarStockEntities context = new BarStockEntities())
+            {
+                for (int i = 0; i < articles.Count; i++)
+                {
+                    if (articles[i].NewAmount != null)
+                    {
+                        int id = articles[i].ArticleID;
+                        tblArticle article = (from a in context.tblArticles where a.ArticleID == id select a).First();
+                        article.Amount = (decimal)articles[i].NewAmount;
+                    }
+                }
+                context.SaveChanges();
+            }
+        }
+
+        public void YesNoWarning(string message)
+        {
+
         }
     }
 }

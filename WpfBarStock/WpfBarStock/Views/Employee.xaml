@@ -81,25 +81,25 @@
         <Label HorizontalAlignment="Right" Grid.Column="3" Grid.Row="1" Margin="0,120,0,0" Width="34">Plus:</Label>
         <Label HorizontalAlignment="Right" Grid.Column="3" Grid.Row="1" Margin="0,140,0,0" Width="45">Minus:</Label>
 
-        <TextBox Grid.Column="5" Grid.Row="1" Margin="6,7,26,169" Width="90"/>
-        <TextBox Grid.Column="5" Grid.Row="1" Margin="6,27,26,149" Width="90"/>
-        <TextBox Grid.Column="5" Grid.Row="1" Margin="6,47,26,129" Width="90"/>
-        <TextBox Grid.Column="5" Grid.Row="1" Margin="6,67,26,109" Width="90"/>
-        <TextBox Grid.Column="5" Grid.Row="1" Margin="6,87,26,89" Width="90"/>
-        <TextBox Grid.Column="5" Grid.Row="1" Margin="6,107,26,69" Width="90"/>
-        <TextBox Grid.Column="5" Grid.Row="1" Margin="6,127,26,49" Width="90"/>
-        <TextBox Grid.Column="5" Grid.Row="1" Margin="6,147,26,29" Width="90"/>
+        <TextBox Grid.Column="5" Grid.Row="1" Text="{Binding Cashbox}" Margin="6,7,26,169" Width="90"/>
+        <TextBox Grid.Column="5" Grid.Row="1" Text="{Binding Kitchen}" Margin="6,27,26,149" Width="90"/>
+        <TextBox Grid.Column="5" Grid.Row="1" Text="{Binding Card}" Margin="6,47,26,129" Width="90"/>
+        <TextBox Grid.Column="5" Grid.Row="1" Text="{Binding Paycheck}" Margin="6,67,26,109" Width="90"/>
+        <TextBox Grid.Column="5" Grid.Row="1" Text="{Binding Owner}" Margin="6,87,26,89" Width="90"/>
+        <TextBox Grid.Column="5" Grid.Row="1" Text="{Binding Newspaper}" Margin="6,107,26,69" Width="90"/>
+        <TextBox Grid.Column="5" Grid.Row="1" Text="{Binding Plus}" Margin="6,127,26,49" Width="90"/>
+        <TextBox Grid.Column="5" Grid.Row="1" Text="{Binding Minus}" Margin="6,147,26,29" Width="90"/>
 
-        <TextBox Text="ime zaposlenog..." Grid.Column="7" Grid.Row="1" Margin="1,67,20,109"/>
-        <TextBox Text="opis..." Grid.Column="7" Grid.Row="1" Margin="1,127,20,49"/>
-        <TextBox Text="opis..." Grid.Column="7" Grid.Row="1" Margin="1,147,20,29"/>
+        <TextBox Text="{Binding PaycheckDescription}" Grid.Column="7" Grid.Row="1" Margin="1,67,20,109" Width="90"/>
+        <TextBox Text="{Binding PlusDescription}" Grid.Column="7" Grid.Row="1" Margin="1,127,20,49" Width="90"/>
+        <TextBox Text="{Binding MinusDescription}" Grid.Column="7" Grid.Row="1" Margin="1,147,20,29" Width="90"/>
 
         <Label HorizontalAlignment="Right" Grid.Column="3" Grid.Row="5" Margin="0,0,0,0" Width="48">Smena:</Label>
         <Label HorizontalAlignment="Right" Grid.Column="3" Grid.Row="5" Margin="0,20,0,0" Width="60">Konobari:</Label>
         <Label HorizontalAlignment="Right" Grid.Column="3" Grid.Row="5" Margin="0,40,0,0" Width="48">Datum:</Label>
 
         <ComboBox HorizontalAlignment="Left" ItemsSource="{Binding Shifts}"  SelectedItem="Shift" Width="50" Grid.Column="5" Grid.Row="5" Margin="6,7,26,169"/>
-        <TextBox HorizontalAlignment="Left" Width="200" Grid.Column="5" Grid.Row="5" Margin="6,27,26,149" Grid.ColumnSpan="3" Height="18"/>
+        <TextBox Text="{Binding Waiters}" HorizontalAlignment="Left" Width="200" Grid.Column="5" Grid.Row="5" Margin="6,27,26,149" Grid.ColumnSpan="3" Height="18"/>
         <DatePicker SelectedDate="{Binding Date}"  HorizontalAlignment="Left" Width="90" Grid.Column="5" Grid.Row="5" Margin="6,47,0,129"/>
 
         <StackPanel   
@@ -136,5 +136,7 @@
                 Width="100" Command="{Binding Calculate}">Izracunaj</Button>
         <Button Grid.Column="5" Grid.Row="7"
                 HorizontalAlignment="Left" Width="100" Command="{Binding Print}">Stampaj</Button>
+        <Button Grid.Column="7" Grid.Row="7"
+                HorizontalAlignment="Left" Width="100" Command="{Binding CopyToDB}">Prepisi</Button>
     </Grid>
 </Window>

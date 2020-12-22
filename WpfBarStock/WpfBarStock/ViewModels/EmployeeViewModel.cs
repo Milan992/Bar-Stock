@@ -26,7 +26,6 @@ namespace WpfBarStock.ViewModels
             articles = service.GetAllArticles();
             checks = new List<Check>();
             shifts = new List<string>() { "1", "2" };
-            cash = "0";
             date = DateTime.Now;
         }
 
@@ -37,7 +36,6 @@ namespace WpfBarStock.ViewModels
             articles = service.GetAllArticles();
             checks = new List<Check>();
             shifts = new List<string>() { "1", "2" };
-            cash = "0";
             date = DateTime.Now;
         }
 
@@ -273,9 +271,9 @@ namespace WpfBarStock.ViewModels
             }
         }
 
-        private string cash;
+        private int cash;
 
-        public string Cash
+        public int Cash
         {
             get { return cash; }
             set
@@ -367,6 +365,7 @@ namespace WpfBarStock.ViewModels
                 service.CalculateSoldArticles(Articles);
                 service.CalculatePriceSold(Articles);
                 Bar = service.CalculateBar(Articles);
+                Cash = service.CalculateCash(cashbox, kitchen, card, paycheck, owner, newspaper, plus, minus, bar, checks);
                 e.ArticlesDataGrid.Items.Refresh();
             }
             catch (Exception ex)
@@ -376,6 +375,40 @@ namespace WpfBarStock.ViewModels
         }
 
         private bool CanCalculateExecute()
+        {
+            return true;
+        }
+
+        private ICommand updateAmount;
+
+        public ICommand UpdateAmount
+        {
+            get
+            {
+                if (updateAmount == null)
+                {
+                    updateAmount = new RelayCommand(param => UpdateAmountExecute(), param => CanUpdateAmountExecute());
+                }
+
+                return updateAmount;
+            }
+        }
+
+        private void UpdateAmountExecute()
+        {
+            try
+            {
+                service.UpdateAmount(Articles);
+                Articles = service.GetAllArticles();
+                e.ArticlesDataGrid.Items.Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private bool CanUpdateAmountExecute()
         {
             return true;
         }
