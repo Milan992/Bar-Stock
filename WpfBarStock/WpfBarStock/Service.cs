@@ -4,6 +4,9 @@ using System.Linq;
 using System.IO;
 using System.Collections.Generic;
 using System.Windows;
+using System.Linq.Expressions;
+using System.Reflection;
+using System.Collections;
 
 namespace WpfBarStock
 {
@@ -191,9 +194,92 @@ namespace WpfBarStock
             }
         }
 
-        public void YesNoWarning(string message)
+        public bool YesNoWarning(string message)
         {
+            MessageBoxResult dialogResult = MessageBox.Show(message, "Upozorenje", MessageBoxButton.YesNo);
+            if (dialogResult == MessageBoxResult.Yes)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
+        /// <summary>
+        ///  Writes a code to make a table from the in an html file with the fileName.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        /// <param name="fileName"></param>
+        public void MakeHtmlTableFromList<T>(List<T> list, string fileName)
+        {
+            PropertyInfo[] myPropertyInfo;
+            // Get the properties of list elements.
+            myPropertyInfo = Type.GetType(list[0].GetType().ToString()).GetProperties();
+
+            using (StreamWriter sw = new StreamWriter(@"..\..\" + fileName + ".html"))
+            {
+                sw.WriteLine("<table>");
+
+                // Write properties names.
+                sw.WriteLine("<tr>");
+                for (int i = 0; i < myPropertyInfo.Length; i++)
+                {
+                    sw.WriteLine("<th>{0}</th>", myPropertyInfo[i].Name);
+                }
+                sw.WriteLine("</tr>");
+
+                // Write values
+                foreach (T item in list)
+                {
+                    sw.WriteLine("<tr>");
+                    for (int i = 0; i < myPropertyInfo.Length; i++)
+                    {
+                        sw.WriteLine("<td>{0}</td>", myPropertyInfo[i].GetValue(item));
+                    }
+                    sw.WriteLine("</tr>");
+                }
+
+                sw.WriteLine("</table>");
+            }
+        }
+
+        /// <summary>
+        /// Writes a code to make a table from the list in file opened by the StreamWriter.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        /// <param name="sw"></param>
+        public void MakeHtmlTableFromList<T>(List<T> list, StreamWriter sw)
+        {
+            PropertyInfo[] myPropertyInfo;
+            // Get the properties of list elements.
+            myPropertyInfo = Type.GetType(list[0].GetType().ToString()).GetProperties();
+
+            sw.WriteLine("<table>");
+
+            // Write properties names.
+            sw.WriteLine("<tr>");
+            for (int i = 0; i < myPropertyInfo.Length; i++)
+            {
+                sw.WriteLine("<th>{0}</th>", myPropertyInfo[i].Name);
+            }
+            sw.WriteLine("</tr>");
+
+            // Write values
+            foreach (T item in list)
+            {
+                sw.WriteLine("<tr>");
+                for (int i = 0; i < myPropertyInfo.Length; i++)
+                {
+                    sw.WriteLine("<td>{0}</td>", myPropertyInfo[i].GetValue(item));
+                }
+                sw.WriteLine("</tr>");
+            }
+
+            sw.WriteLine("</table>");
         }
     }
 }

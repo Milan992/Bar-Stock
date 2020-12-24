@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using System.Web;
 using System.Windows;
 using System.Windows.Controls;
@@ -310,21 +311,21 @@ namespace WpfBarStock.ViewModels
                 //CODE AFTER CREATING HTML FILE:
 
                 //convert html to pdf
-                //HtmlLoadOptions htmloptions = new HtmlLoadOptions(@"D:\filedirectory"); // enter realative file directory adres
-                //Document doc = new Document(@"D:\CV\filename.html", htmloptions); // enter realative file adres
-                //doc.Save("output1.pdf", Aspose.Pdf.SaveFormat.Pdf);
+                HtmlLoadOptions htmloptions = new HtmlLoadOptions(@"..\..\Stock.html"); // enter realative file directory adres
+                Document doc = new Document(@"..\..\Stock.html", htmloptions); // enter realative file adres
+                doc.Save("output1.pdf", Aspose.Pdf.SaveFormat.Pdf);
 
                 //print pdf file
-                //var pd = new PrintDialog();
-                //pd.ShowDialog();
-                //var info = new ProcessStartInfo()
-                //{
-                //    Verb = "print",
-                //    CreateNoWindow = true,
-                //    FileName = @"", //add file adress
-                //    WindowStyle = ProcessWindowStyle.Hidden
-                //};
-                //Process.Start(info);
+                var pd = new PrintDialog();
+                pd.ShowDialog();
+                var info = new ProcessStartInfo()
+                {
+                    Verb = "print",
+                    CreateNoWindow = true,
+                    FileName = @"", //add file adress
+                    WindowStyle = ProcessWindowStyle.Hidden
+                };
+                Process.Start(info);
 
                 PrintDialog printDialog = new PrintDialog();
                 if (printDialog.ShowDialog() == true)
@@ -362,6 +363,7 @@ namespace WpfBarStock.ViewModels
         {
             try
             {
+                MakeStockHtmlFIle();
                 service.CalculateSoldArticles(Articles);
                 service.CalculatePriceSold(Articles);
                 Bar = service.CalculateBar(Articles);
@@ -398,9 +400,13 @@ namespace WpfBarStock.ViewModels
         {
             try
             {
-                service.UpdateAmount(Articles);
-                Articles = service.GetAllArticles();
-                e.ArticlesDataGrid.Items.Refresh();
+                if (service.YesNoWarning("Da li ste sigurni da zelite da prepisete? Pocetno stanje ce se promeniti na trenutno, " +
+                    "a sva ostala polja ce ostati prazna. Prethodno stanje se ne moze vratiti posle prepisivanja."))
+                {
+                    service.UpdateAmount(Articles);
+                    Articles = service.GetAllArticles();
+                    e.ArticlesDataGrid.Items.Refresh();
+                }
             }
             catch (Exception ex)
             {
@@ -411,6 +417,55 @@ namespace WpfBarStock.ViewModels
         private bool CanUpdateAmountExecute()
         {
             return true;
+        }
+
+        #endregion
+
+        #region Methods
+
+        public void MakeStockHtmlFIle()
+        {
+            PropertyInfo[] myPropertyInfo;
+            // Get the properties of 'Type' class object.
+            myPropertyInfo = Type.GetType("WpfBarStock.Model.vwArticle").GetProperties();
+
+            File.WriteAllText(@"..\..\Stock.html", "");
+            using (StreamWriter sw = new StreamWriter(@"..\..\Stock.html", true))
+            {
+                // Begining of the html file is always the same, so we copy it from the file.
+                var htmlfileBegining = File.ReadAllText(@"..\..\htmlFileBegining.html");
+                sw.Write(htmlfileBegining);
+
+                sw.WriteLine("<table>");
+
+                // Write column names
+                sw.WriteLine("<tr>");
+                sw.WriteLine("<th>rb</th>");
+                sw.WriteLine("<th>naziv</th>");
+                sw.WriteLine("<th>poc st</th>");
+                sw.WriteLine("<th>tren st</th>");
+                sw.WriteLine("<th>stiglo</th>");
+                sw.WriteLine("<th>prodato</th>");
+                sw.WriteLine("<th>cena</th>");
+                sw.WriteLine("</tr>");
+
+                // Write values
+                foreach (vwArticle article in Articles)
+                {
+                    sw.WriteLine("<tr><td>{0}</td>", article.ArticleID);
+                    sw.WriteLine("<td>{0}</td>", article.ArticleName);
+                    sw.WriteLine("<td>{0}</td>", article.Amount);
+                    sw.WriteLine("<td>{0}</td>", article.NewAmount);
+                    sw.WriteLine("<td>{0}</td>", article.ProcuredAmount);
+                    sw.WriteLine("<td>{0}</td>", article.AmountSold);
+                    sw.WriteLine("<td>{0}</td></tr>", article.PriceSold);
+                }
+
+                sw.WriteLine("</table>");
+
+                // End of the html file.
+                sw.WriteLine("</body>\n</html>");
+            }
         }
 
         #endregion
